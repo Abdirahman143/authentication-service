@@ -13,4 +13,5 @@ import java.util.List;
 public class RoleRequestDTO {
     private Long id;
     private String roleName;
+
 }
