@@ -22,9 +22,7 @@ public class UserRequestDTO {
         @NotBlank
         @Pattern(regexp = "^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$")
         private String password;
-
         private Set<Long> roleIds; // IDs of the roles to be assigned to the user
-
         private boolean enabled;
     }
 
