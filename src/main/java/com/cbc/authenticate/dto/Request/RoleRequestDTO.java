@@ -10,7 +10,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoleRequest {
+public class RoleRequestDTO {
     private Long id;
     private String roleName;
 }

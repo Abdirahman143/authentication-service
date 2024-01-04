@@ -6,13 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
+
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponse {
+@Builder
+public class UserResponseDTO {
+    private Long id;
     private String userName;
-    private List<Long> roles;
-
+    private Set<String> roles; // A set of role names
     private boolean enabled;
 }
