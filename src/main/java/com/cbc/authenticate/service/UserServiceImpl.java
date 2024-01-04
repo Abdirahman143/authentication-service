@@ -26,7 +26,7 @@ public class UserServiceImpl  implements  UserService{
         this.passwordEncoder = passwordEncoder;
     }
 
-
+       @Override
     public UserResponseDTO registerNewUser(UserRequestDTO userRequestDTO){
         User user = new User();
         user.setUserName(userRequestDTO.getUserName());
