@@ -3,6 +3,7 @@ package com.cbc.authenticate.controller;
 import com.cbc.authenticate.dto.Request.AuthRequestDTO;
 import com.cbc.authenticate.dto.Response.JwtResponseDTO;
 import com.cbc.authenticate.security.JwtUtil;
+import com.cbc.authenticate.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,16 +28,13 @@ public class AuthenticationController {
     @Autowired
     private JwtUtil jwtUtil;
 
+
+    @Autowired
+    private AuthenticationService authenticationService;
     @PostMapping("/login")
     public ResponseEntity<JwtResponseDTO> authenticateAndGetToken(@RequestBody AuthRequestDTO authRequestDTO) {
         try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authRequestDTO.getUserName(), authRequestDTO.getPassword()));
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            String jwt = jwtUtil.generateToken(authRequestDTO.getUserName());
-
+            String jwt = authenticationService.authenticateAndGetToken(authRequestDTO);
             return ResponseEntity.ok(new JwtResponseDTO(jwt));
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password.", e);

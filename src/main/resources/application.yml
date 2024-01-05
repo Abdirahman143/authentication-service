@@ -1,0 +1,29 @@
+
+# application.yml
+jwt:
+  secret: bXJtYWRvb2JlZ2FiYW5lMQ==
+  expiration: 5  # This now represents minutes.
+
+
+spring:
+  datasource:
+    username: postgres
+    password: abdi
+    url: jdbc:postgresql://localhost:5431/authentication_service
+
+
+  jpa:
+    hibernate:
+      ddlAuto: update
+    showSql: true
+logging:
+  level:
+    org:
+      springframework:
+        security=DEBUG:
+    authentication_service:
+        package:
+          com:
+            cbc:
+              authenticate:
+                service=DEBUG:
