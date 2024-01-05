@@ -40,16 +40,19 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
+
     public String generateToken(String username) {
         return createToken(username);
     }
 
 
     private String createToken(String subject) {
+        // Convert expiration time from minutes to milliseconds
+        long expirationTimeInMillis = expirationTime * 60 * 1000;
         return Jwts.builder()
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTimeInMillis))
                 .signWith(SignatureAlgorithm.HS256, secretKey).compact();
     }
 
